@@ -1,13 +1,15 @@
 const MODULE_ID = 'called-shots-5e';
 
 const CALLED_SHOTS = [
-  { label: 'No Called Shot', penalty: 0 },
-  { label: 'Medium (−3)', penalty: -3 },
-  { label: 'Small (−6)', penalty: -6 },
-  { label: 'Tiny (−9)', penalty: -9 }
+  { label: 'No Called Shot', penalty: 0, tag: null },
+  { label: 'Medium (−3)', penalty: -3, tag: 'Medium' },
+  { label: 'Small (−6)', penalty: -6, tag: 'Small' },
+  { label: 'Tiny (−9)', penalty: -9, tag: 'Tiny' },
+  { label: 'Instant Kill (−12)', penalty: -12, tag: 'Instant Kill' }
 ];
 
 let _selectedPenalty = 0;
+let _selectedTag = null;
 let _lastAppId = null;
 
 Hooks.once('init', () => {
@@ -37,10 +39,11 @@ function _handleDialog(app, el) {
     <label>Called Shot Target Size</label>
     <div class="form-fields">
       <select name="called-shot-penalty" class="called-shots-5e-select">
-        ${CALLED_SHOTS.map(s => `<option value="${s.penalty}">${s.label}</option>`).join('')}
+        ${CALLED_SHOTS.map(s => `<option value="${s.penalty}" data-tag="${s.tag ?? ''}">${s.label}</option>`).join('')}
       </select>
     </div>
     <p class="hint called-shots-5e-hint">Smaller targets are harder to hit.</p>
+    <p class="called-shots-5e-desc"></p>
   `;
 
   // Insert before the situational bonus field
@@ -53,16 +56,25 @@ function _handleDialog(app, el) {
 
   // Restore selection across re-renders
   select.value = _selectedPenalty;
+  _updateDesc(group, _selectedTag);
 
   // Apply stored penalty to the situational field
   _applyPenalty(el);
 
   select.addEventListener('change', () => {
     _selectedPenalty = parseInt(select.value) || 0;
+    _selectedTag = select.selectedOptions[0]?.dataset.tag || null;
     _applyPenalty(el);
+    _updateDesc(group, _selectedTag);
   });
 
   app?.setPosition?.({ height: 'auto' });
+}
+
+function _updateDesc(group, tag) {
+  const desc = group.querySelector('.called-shots-5e-desc');
+  if (!desc) return;
+  desc.textContent = tag ? `Called Shots - ${tag}` : '';
 }
 
 function _applyPenalty(el) {

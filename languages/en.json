@@ -6,6 +6,7 @@
     "none": "No Called Shot",
     "medium": "Medium (−3)",
     "small": "Small (−6)",
-    "tiny": "Tiny (−9)"
+    "tiny": "Tiny (−9)",
+    "instantKill": "Instant Kill (−12)"
   }
 }
