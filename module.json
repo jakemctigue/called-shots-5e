@@ -1,0 +1,45 @@
+{
+  "id": "called-shots-5e",
+  "title": "Called Shots for 5e",
+  "description": "",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.346",
+    "maximum": "13"
+  },
+  "authors": [
+    {
+      "name": "Jake McTigue",
+      "email": "jasmine@mctigueanalytics.com"
+    }
+  ],
+  "esmodules": [
+    "scripts/module.mjs"
+  ],
+  "styles": [
+    "styles/module.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "verified": "5.3.3"
+        }
+      }
+    ]
+  },
+  "socket": false,
+  "url": "",
+  "manifest": "",
+  "download": ""
+}

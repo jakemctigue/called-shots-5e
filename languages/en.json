@@ -1,0 +1,11 @@
+{
+  "called-shots-5e": {
+    "title": "Called Shots for 5e",
+    "label": "Called Shot Target Size",
+    "hint": "Smaller targets are harder to hit.",
+    "none": "No Called Shot",
+    "medium": "Medium (−3)",
+    "small": "Small (−6)",
+    "tiny": "Tiny (−9)"
+  }
+}
